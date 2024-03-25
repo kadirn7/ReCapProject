@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Entity_Framework
 {
-    internal class EfColorDal : IColorDal
+    public class EfColorDal : IColorDal
     {
         public void Add(Colors entity)
         {

@@ -10,7 +10,8 @@ namespace Business.Abstract
     public interface ICarService
     {
         List<Cars> GetAll();
-        List<Cars> GetAllByCategoryId(int id);
-        List<Cars> GetByUnitPrice(decimal min, decimal max);
+        List<Cars> GetAllByBrandId(int id);
+        List<Cars> GetByDailyPrice(decimal min, decimal max);
+        public void Add(Cars car);
     }
 }

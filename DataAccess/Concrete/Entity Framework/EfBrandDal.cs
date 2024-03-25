@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Entity_Framework
 {
-    internal class EfBrandDal : IBrandDal
+    public class EfBrandDal : IBrandDal
     {
         public void Add(Brand entity)
         {
