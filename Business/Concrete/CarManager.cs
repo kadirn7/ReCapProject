@@ -13,19 +13,20 @@ namespace Business.Concrete
 
     {
         ICarDal _carDal;
-        public CarManager(ICarDal carDal)
-        {
-            _carDal = carDal;
-        }
-
-        public List<Cars> Get(int id)
-        {
-            return _carDal.GetById(id);
-        }
 
         public List<Cars> GetAll()
         {
-            return _carDal.GetAll();    
+            throw new NotImplementedException();
+        }
+
+        public List<Cars> GetAllByCategoryId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Cars> GetByUnitPrice(decimal min, decimal max)
+        {
+            throw new NotImplementedException();
         }
     }
 }
