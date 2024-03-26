@@ -62,7 +62,7 @@ namespace Business.Concrete
 
         public List<CarDetailsDto> GetCarDetails()
         {
-            throw new NotImplementedException();
+            return _carDal.GetCarDetails();
         }
     }
 }
