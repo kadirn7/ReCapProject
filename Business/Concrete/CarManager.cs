@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.DTOs;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,11 @@ namespace Business.Concrete
         public List<Cars> GetByDailyPrice(decimal min, decimal max)
         {
             return _carDal.GetAll(P=>P.DailyPrice>=min && P.DailyPrice<=max);
+        }
+
+        public List<CarDetailsDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }
