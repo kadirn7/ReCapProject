@@ -15,8 +15,12 @@ namespace DataAccess.Concrete.Entity_Framework
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Rent_A_Car;Trusted_Connection=true");
         }
-        public DbSet<Cars> Cars { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Entities.Concrete.Color >().HasKey(c => c.ColorId);
+        }
+        public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        //public DbSet<Colors> Colors { get; set; }
+        public DbSet<Entities.Concrete.Color> Colors { get; set; }
     }
 }

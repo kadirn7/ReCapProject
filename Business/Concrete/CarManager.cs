@@ -19,7 +19,7 @@ namespace Business.Concrete
             _carDal = productDal;
         }
 
-        public void Add(Cars car)
+        public void Add(Car car)
         {
             ValidateCar(car);
 
@@ -27,7 +27,7 @@ namespace Business.Concrete
 
             _carDal.Add(car);
         }
-        private void ValidateCar(Cars car)
+        private void ValidateCar(Car car)
         {
             
             // Araba ismi minimum 2 karakter olmalı
@@ -45,17 +45,17 @@ namespace Business.Concrete
             //bir ArgumentException fırlatılır ve işlem durdurulur.
         }
 
-        public List<Cars> GetAll()
+        public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public List<Cars> GetAllByBrandId(int id)
+        public List<Car> GetAllByBrandId(int id)
         {
             return _carDal.GetAll(p => p.BrandId == id);
         }
 
-        public List<Cars> GetByDailyPrice(decimal min, decimal max)
+        public List<Car> GetByDailyPrice(decimal min, decimal max)
         {
             return _carDal.GetAll(P=>P.DailyPrice>=min && P.DailyPrice<=max);
         }

@@ -10,46 +10,46 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal 
     {
-        List<Cars> _cars;
+        List<Car> _cars;
         public InMemoryCarDal()
         {
-            _cars = new List<Cars>() 
+            _cars = new List<Car>() 
             {
-            new Cars { Id=1,BrandId=1,ColorId=1,DailyPrice=10000,Description="SüperB"},
-            new Cars { Id = 2, BrandId = 2, ColorId = 2, DailyPrice = 12000, Description = "SüperB" }
+            new Car { Id=1,BrandId=1,ColorId=1,DailyPrice=10000,Description="SüperB"},
+            new Car { Id = 2, BrandId = 2, ColorId = 2, DailyPrice = 12000, Description = "SüperB" }
         
             };
         }
 
 
-        public void Add(Cars car)
+        public void Add(Car car)
         {
             _cars.Add(car);
         }
 
-        public void Delete(Cars car)
+        public void Delete(Car car)
         {
-            Cars cartoDelete = null;
+            Car cartoDelete = null;
             cartoDelete=_cars.SingleOrDefault(p=>p.Id==car.Id);
 
             _cars.Remove(cartoDelete);
         }
 
-        public List<Cars> GetAll()
+        public List<Car> GetAll()
         {
             return _cars;
         }
 
-        public List<Cars> GetById(int carId)
+        public List<Car> GetById(int carId)
         {
             return _cars.Where(p=>p.Id == carId).ToList();
         }
 
         
 
-        public void Update(Cars car)
+        public void Update(Car car)
         {
-            Cars carsToUpdate=_cars.SingleOrDefault(p=> p.Id==car.Id);
+            Car carsToUpdate=_cars.SingleOrDefault(p=> p.Id==car.Id);
             carsToUpdate.BrandId = car.BrandId;
             carsToUpdate.ColorId = car.ColorId;
             carsToUpdate.ModelYear = car.ModelYear;
