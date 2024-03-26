@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.DTOs;
 using Entities.Concrete;
@@ -19,13 +21,15 @@ namespace Business.Concrete
             _carDal = productDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
             ValidateCar(car);
 
             // Araba ekleme işlemi için özel kurallar burada kontrol edilir
 
             _carDal.Add(car);
+
+            return new SuccessResult("Ürünler lis"); // Dönüşüm yapılıyor
         }
         private void ValidateCar(Car car)
         {
@@ -45,19 +49,20 @@ namespace Business.Concrete
             //bir ArgumentException fırlatılır ve işlem durdurulur.
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public List<Car> GetAllByBrandId(int id)
+        public IDataResult<List<Car>> GetAllByBrandId(int id)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public List<Car> GetByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
-            return _carDal.GetAll(P=>P.DailyPrice>=min && P.DailyPrice<=max);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(P=>P.DailyPrice>=min && P.DailyPrice<=max));
         }
 
         public List<CarDetailsDto> GetCarDetails()
