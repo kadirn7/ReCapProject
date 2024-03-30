@@ -19,6 +19,35 @@ CREATE TABLE [dbo].[Colors] (
     [ColorName]    NVARCHAR (50) NOT NULL,
     CONSTRAINT [PK_Colors] PRIMARY KEY CLUSTERED ([ColorId] ASC)
 );
+CREATE TABLE [dbo].[Users] (
+    [Id]         INT           IDENTITY (1, 1) NOT NULL,
+    [FirstName]  NVARCHAR(50)  NOT NULL,
+    [LastName]   NVARCHAR(50)  NOT NULL,
+    [Email]      NVARCHAR(100) NOT NULL,
+    [Password]   NVARCHAR(50)  NOT NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+-- Müşteriler tablosu
+CREATE TABLE [dbo].[Customers] (
+    [CustomerId]  INT           IDENTITY (1, 1) NOT NULL,
+    [UserId]      INT           NOT NULL,
+    [CompanyName] NVARCHAR(100) NOT NULL,
+    CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED ([CustomerId] ASC),
+    CONSTRAINT [FK_Customers_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
+);
+
+-- Arabanın kiralanma bilgisini tutan tablo
+CREATE TABLE [dbo].[Rentals] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [CarId]       INT           NOT NULL,
+    [CustomerId]  INT           NOT NULL,
+    [RentDate]    DATETIME      NOT NULL,
+    [ReturnDate]  DATETIME      NULL,
+    CONSTRAINT [PK_Rentals] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Rentals_Cars] FOREIGN KEY ([CarId]) REFERENCES [dbo].[Cars] ([Id]),
+    CONSTRAINT [FK_Rentals_Customers] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customers] ([CustomerId])
+);
 
 INSERT INTO Cars (BrandId, ColorId, ModelYear, DailyPrice, Description) 
 VALUES (1, 1, 2020, 150.00, 'Audi A4'),
