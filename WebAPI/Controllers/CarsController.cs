@@ -18,13 +18,36 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
 
-        [HttpGet]
-        public string Get()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
             
             var result = _carService.GetAll();
-            return result.Message;
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
-
+        [HttpPost("add")]
+        public IActionResult Get(Car car) 
+        {
+            var result=_carService.Add(car);
+            if(result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result =_carService.GetById(id);
+            if(result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result);
+        }
     }
 }
